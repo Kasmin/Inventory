@@ -12,6 +12,7 @@ namespace Inventory.Models
         public string Position { get; set; }
         [PersonalData]
         public string Organisation { get; set; }
+        public List<InventorySheet> InventorySheets { get;set;}
     }
     public class UserRole : IdentityRole<Guid>
     {

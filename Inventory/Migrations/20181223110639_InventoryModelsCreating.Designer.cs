@@ -4,14 +4,16 @@ using Inventory.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Inventory.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181223110639_InventoryModelsCreating")]
+    partial class InventoryModelsCreating
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,12 +48,6 @@ namespace Inventory.Migrations
                     b.HasIndex("InventorySheetId");
 
                     b.ToTable("InventoryItems");
-
-                    b.HasData(
-                        new { Id = 1, Cost = 83250.0, Count = 1, DateOfRegistration = new DateTime(2007, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), Description = "ул. Правда 25А, Серверная №1", InventoryNumber = "ВА2162", InventorySheetId = 1, LifeTime = 20, Name = "АТС Panasonic NCP500" },
-                        new { Id = 2, Cost = 287290.0, Count = 1, DateOfRegistration = new DateTime(2012, 9, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), Description = "ул. Правда 25А, Серверная №1", InventoryNumber = "ВА2198", InventorySheetId = 1, LifeTime = 20, Name = "VipNet Coordinator HW1000" },
-                        new { Id = 3, Cost = 7290.0, Count = 1, DateOfRegistration = new DateTime(2013, 3, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), Description = "ул. Правда 25А, ЦУКС, Смена ОДС", InventoryNumber = "ВА2212", InventorySheetId = 1, LifeTime = 10, Name = "IP телефон Cisco CP7911" }
-                    );
                 });
 
             modelBuilder.Entity("Inventory.Models.InventorySheet", b =>
@@ -69,10 +65,6 @@ namespace Inventory.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("InventorySheets");
-
-                    b.HasData(
-                        new { Id = 1, AccountNumber = "101", UserId = new Guid("7d026625-3759-435e-9411-08d667f56c42") }
-                    );
                 });
 
             modelBuilder.Entity("Inventory.Models.User", b =>
