@@ -5,10 +5,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Инвентаризационная ведомость</h2>
+@*Добавить вывод номера счета*@
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-controller="InventoryItem" asp-action="Create">Добавить позицию</a>
+    @*нужно передавать Id InventorySheet для добавления в текущую ведомость*@
 </p>
 <table class="table">
     <thead>

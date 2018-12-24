@@ -5,10 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>View</h2>
+<h2>Инвентаризационные ведомости</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Добавить ведомость</a>
 </p>
 <table class="table">
     <thead>
@@ -20,17 +20,45 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.AccountNumber)
-            </td>
-            <td>
-                <a asp-action="InventorySheet" asp-route-id="@item.Id">Посмотреть</a> |
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountNumber)
+                </td>
+                <td>
+                    <a asp-action="InventorySheet" asp-route-id="@item.Id">Посмотреть</a> |
+                    <a asp-action="Edit" asp-route-id="@item.Id">Редактировать</a> |
+                    <a 
+                       href="#" 
+                       data-toggle="modal" 
+                       data-target="#deleteModal" 
+                       data-idsheet="@item.Id" 
+                       data-accountnumber="@item.AccountNumber"
+                    >
+                        Удалить
+                    </a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+<partial name="_ModalDelete" />
+
+@section scripts 
+{
+    <script>
+        $('#deleteModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var idSheet = button.data('idsheet') // Extract info from data-* attributes
+            var accountNumber = button.data('accountnumber') // Extract info from data-* attributes
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $(this)
+            modal.find('.delete').attr("href", "inventory/delete/" + idSheet)
+            modal.find('.modal-header .modal-title').text("Удаление ведомости")
+            modal.find('.modal-body h5').text("Вы действительно хотите удалить ведомость по счету " + accountNumber + "?")
+        })
+    </script>
+}

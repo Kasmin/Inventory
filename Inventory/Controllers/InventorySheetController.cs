@@ -26,7 +26,12 @@ namespace Inventory.Controllers
         [Route("")]
         public async Task<IActionResult> Index()
         {
+            // Получаем ID залогиненного пользователя
+            string userGuidString = _userManager.GetUserId(HttpContext.User);
+            Guid userGuid = new Guid(userGuidString);
+
             List<InventorySheet> sheets = await _db.InventorySheets
+                .Where(s => s.UserId == userGuid)
                 .Include(s => s.InventoryItems)
                 .ToListAsync();
 
@@ -45,9 +50,6 @@ namespace Inventory.Controllers
         // GET: 
         public ActionResult Create()
         {
-            var userGuid = _userManager.GetUserId(HttpContext.User);
-            ViewBag.userGuid = userGuid;
-
             return View();
         }
 
@@ -55,15 +57,68 @@ namespace Inventory.Controllers
         [HttpPost]
         [Route("create")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(InventorySheet inventorySheet)
+        public async Task<ActionResult> Create(InventorySheet _inventorySheet)
         {
             try
             {
                 // TODO: Add insert logic here
-                var userGuid = _userManager.GetUserId(HttpContext.User);
-                inventorySheet.UserId = new Guid(userGuid);
+                string userGuidString = _userManager.GetUserId(HttpContext.User);
+                _inventorySheet.UserId = new Guid(userGuidString);
 
-                _db.InventorySheets.Add(inventorySheet);
+                _db.InventorySheets.Add(_inventorySheet);
+                await _db.SaveChangesAsync();
+
+                return RedirectToAction("Index", "InventorySheet");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: 
+        [Route("edit/{id}")]
+        public async Task<ActionResult> Edit(int id)
+        {
+            InventorySheet inventorySheet = await _db.InventorySheets
+                .FirstOrDefaultAsync(s => s.Id == id);
+
+            return View(inventorySheet);
+        }
+
+        // POST:
+        [HttpPost]
+        [Route("edit/{id}")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit(int id, InventorySheet _inventorySheet)
+        {
+            try
+            {
+                // TODO: Add update logic here
+                InventorySheet inventorySheet = await _db.InventorySheets
+                    .FirstOrDefaultAsync(s => s.Id == id);
+                inventorySheet.AccountNumber = _inventorySheet.AccountNumber;
+                _db.InventorySheets.Update(inventorySheet);
+                await _db.SaveChangesAsync();
+
+                return RedirectToAction("Index", "InventorySheet");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: 
+        [Route("delete/{id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            try
+            {
+                // TODO: Add delete logic here
+                InventorySheet inventorySheet = await _db.InventorySheets
+                    .FirstOrDefaultAsync(s => s.Id == id);
+                _db.InventorySheets.Remove(inventorySheet);
                 await _db.SaveChangesAsync();
 
                 return RedirectToAction("Index", "InventorySheet");
