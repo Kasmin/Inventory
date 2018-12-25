@@ -1,15 +1,15 @@
 ﻿@model IEnumerable<Inventory.Models.InventoryItem>
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Инвентаризационная ведомость";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Инвентаризационная ведомость</h2>
+<h2>@ViewData["Title"]</h2>
 @*Добавить вывод номера счета*@
 
 <p>
-    <a asp-controller="InventoryItem" asp-action="Create">Добавить позицию</a>
+    <a asp-controller="InventoryItem" asp-action="Create" asp-route-id="@ViewBag.SheetId">Добавить позицию</a>
     @*нужно передавать Id InventorySheet для добавления в текущую ведомость*@
 </p>
 <table class="table">

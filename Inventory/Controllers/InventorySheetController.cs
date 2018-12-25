@@ -42,6 +42,7 @@ namespace Inventory.Controllers
         public async Task<IActionResult> InventorySheet(int id)
         {
             List<InventoryItem> items = await _db.InventoryItems.Where(i => i.InventorySheetId == id).ToListAsync();
+            ViewBag.SheetId = id;
 
             return View(items);
         }

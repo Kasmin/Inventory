@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using Inventory.Data;
 using Inventory.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace Inventory.Views.InventorySheet
@@ -14,10 +16,12 @@ namespace Inventory.Views.InventorySheet
     public class InventoryItemController : Controller
     {
         public ApplicationDbContext _db;
+        private readonly UserManager<User> _userManager;
 
-        public InventoryItemController(ApplicationDbContext db)
+        public InventoryItemController(ApplicationDbContext db, UserManager<User> userManager)
         {
             _db = db;
+            _userManager = userManager;
         }
 
         // GET: InventoryItem/Details/5
@@ -29,10 +33,12 @@ namespace Inventory.Views.InventorySheet
             return View(item);
         }
 
-        [Route("item/create")]
+        [Route("item/create/{id}")]
         // GET: InventoryItem/Create
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
+            ViewBag.SheetId = id;
+
             return View();
         }
 
