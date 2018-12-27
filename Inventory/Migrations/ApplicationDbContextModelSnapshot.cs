@@ -128,6 +128,10 @@ namespace Inventory.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasData(
+                        new { Id = new Guid("7d026625-3759-435e-9411-08d667f56c42"), AccessFailedCount = 0, ConcurrencyStamp = "44fe737e-d684-4aac-a6c3-9baad012e36a", Email = "user@user.ru", EmailConfirmed = false, LockoutEnabled = true, NormalizedEmail = "USER@USER.RU", NormalizedUserName = "USER@USER.RU", PasswordHash = "AQAAAAEAACcQAAAAEG0qRduIF1IoSaSKLwjNralERLDt62StIlFFIA2V77c1dV1qJrw/SemWIWrWeOtyLw==", PhoneNumberConfirmed = false, SecurityStamp = "PTY4YHQHQOBOTTKVGZUKUCQVK2GAPPS5", TwoFactorEnabled = false, UserName = "user@user.ru" }
+                    );
                 });
 
             modelBuilder.Entity("Inventory.Models.UserRole", b =>

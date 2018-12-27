@@ -46,11 +46,13 @@ namespace Inventory.Views.InventorySheet
         [HttpPost]
         [Route("item/create")]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> Create(InventoryItem _inventoryItem)
         {
             try
             {
                 // TODO: Add insert logic here
+                _db.InventoryItems.Add(_inventoryItem);
+                await _db.SaveChangesAsync();
 
                 return RedirectToAction("Index", "InventorySheet");
             }

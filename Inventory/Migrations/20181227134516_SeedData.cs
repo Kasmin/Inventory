@@ -3,10 +3,15 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Inventory.Migrations
 {
-    public partial class SeedDataInventoryModels : Migration
+    public partial class SeedData : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "Organisation", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Position", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { new Guid("7d026625-3759-435e-9411-08d667f56c42"), 0, "44fe737e-d684-4aac-a6c3-9baad012e36a", "user@user.ru", false, true, null, "USER@USER.RU", "USER@USER.RU", null, "AQAAAAEAACcQAAAAEG0qRduIF1IoSaSKLwjNralERLDt62StIlFFIA2V77c1dV1qJrw/SemWIWrWeOtyLw==", null, false, null, "PTY4YHQHQOBOTTKVGZUKUCQVK2GAPPS5", false, "user@user.ru" });
+
             migrationBuilder.InsertData(
                 table: "InventorySheets",
                 columns: new[] { "Id", "AccountNumber", "UserId" },
@@ -49,6 +54,11 @@ namespace Inventory.Migrations
                 table: "InventorySheets",
                 keyColumn: "Id",
                 keyValue: 1);
+
+            migrationBuilder.DeleteData(
+                table: "AspNetUsers",
+                keyColumns: new[] { "Id", "ConcurrencyStamp" },
+                keyValues: new object[] { new Guid("7d026625-3759-435e-9411-08d667f56c42"), "44fe737e-d684-4aac-a6c3-9baad012e36a" });
         }
     }
 }

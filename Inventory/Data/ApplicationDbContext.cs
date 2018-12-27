@@ -22,6 +22,7 @@ namespace Inventory.Data
         {
             base.OnModelCreating(builder);
 
+            builder.ApplyConfiguration(new UserMap());
             builder.ApplyConfiguration(new InventorySheetMap());
             builder.ApplyConfiguration(new InventoryItemMap());
         }
