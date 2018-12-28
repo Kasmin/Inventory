@@ -1,19 +1,37 @@
 ﻿@model Inventory.Models.InventoryItem
 
 @{
-    ViewData["Title"] = "Create";
+    string formHeader = "";
+    string submitName = "";
+    string actionUrl = "";
+
+    if (Model == null)
+    {
+        formHeader = "Добавление позиции";
+        submitName = "Добавить";
+        actionUrl = "/inventory/item/create";
+    } else
+    {
+        formHeader = "Редактирование позиции";
+        submitName = "Обновить";
+        actionUrl = "/inventory/item/edit";
+    }
+    ViewData["Title"] = formHeader;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
+<h2>@ViewData["Title"]</h2>
 
-<h4>InventoryItem</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form action="/inventory/item/create" method="post">
+        <form action=@actionUrl method="post">
             @Html.AntiForgeryToken()
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @if (Model != null)
+            {
+                <input type="hidden" asp-for="Id" />
+            }
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
@@ -50,11 +68,10 @@
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                @*<label asp-for="InventorySheetId" class="control-label"></label>*@
                 <input asp-for="InventorySheetId" type="hidden" class="form-control" value="@ViewBag.SheetId">
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value=@submitName class="btn btn-default" />
             </div>
         </form>
     </div>

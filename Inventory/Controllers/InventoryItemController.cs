@@ -37,6 +37,7 @@ namespace Inventory.Views.InventorySheet
         // GET: InventoryItem/Create
         public ActionResult Create(int id)
         {
+            // id - это индентификатор ведомости InventorySheet
             ViewBag.SheetId = id;
 
             return View();
@@ -64,20 +65,25 @@ namespace Inventory.Views.InventorySheet
 
         // GET: InventoryItem/Edit/5
         [Route("item/edit/{id}")]
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
-            return View();
+            InventoryItem inventoryItem = await _db.InventoryItems.FirstOrDefaultAsync(i => i.Id == id);
+            ViewBag.SheetId = inventoryItem.InventorySheetId;
+
+            return View("Create", inventoryItem);
         }
 
         // POST: InventoryItem/Edit/5
         [HttpPost]
-        [Route("item/edit/{id}")]
+        [Route("item/edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Edit(InventoryItem _inventoryItem)
         {
             try
             {
                 // TODO: Add update logic here
+                _db.InventoryItems.Update(_inventoryItem);
+                await _db.SaveChangesAsync();
 
                 return RedirectToAction("Index", "InventorySheet");
             }
