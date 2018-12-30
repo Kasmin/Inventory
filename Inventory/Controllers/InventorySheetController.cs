@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Inventory.Data;
 using Inventory.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -11,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Inventory.Controllers
 {
+    [Authorize]
     [Route("inventory")]
     public class InventorySheetController : Controller
     {
