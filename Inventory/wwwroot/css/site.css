@@ -12,6 +12,17 @@ body {
     padding-right: 15px;
 }
 
+.login-buttons ul li {
+    list-style: none;
+    display: inline-block;
+}
+.login-buttons{
+    text-align: center;
+    margin: 20px 0;
+}
+.margin-auto-width{
+    margin: 0 auto;
+}
 /* Carousel */
 .carousel-caption p {
     font-size: 20px;
