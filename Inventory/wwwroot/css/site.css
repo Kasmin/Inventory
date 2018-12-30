@@ -35,3 +35,13 @@ body {
         display: none;
     }
 }
+
+/* ---------- Item Details ----------- */
+@media (min-width: 768px) {
+    .dl-horizontal dt {
+        width: 180px;
+    }
+    .dl-horizontal dd {
+        margin-left: 200px;
+    }
+}

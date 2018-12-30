@@ -95,20 +95,15 @@ namespace Inventory.Views.InventorySheet
 
         // GET: InventoryItem/Delete/5
         [Route("item/delete/{id}")]
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: InventoryItem/Delete/5
-        [HttpPost]
-        [Route("item/delete/{id}")]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Delete(int id)
         {
             try
             {
                 // TODO: Add delete logic here
+                InventoryItem inventoryItem = await _db.InventoryItems
+                    .FirstOrDefaultAsync(s => s.Id == id);
+                _db.InventoryItems.Remove(inventoryItem);
+                await _db.SaveChangesAsync();
 
                 return RedirectToAction("Index", "InventorySheet");
             }

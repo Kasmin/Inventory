@@ -1,13 +1,13 @@
 ﻿@model Inventory.Models.InventorySheet
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Редактирование счета " + Model.AccountNumber;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
+<h2>Редактирование</h2>
 
-<h4>InventorySheet</h4>
+<h4>Инвентаризационная ведомость</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -27,7 +27,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Назад к списку</a>
 </div>
 
 @section Scripts {

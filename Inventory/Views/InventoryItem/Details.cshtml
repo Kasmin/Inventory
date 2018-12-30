@@ -1,22 +1,22 @@
 ﻿@model Inventory.Models.InventoryItem
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Позиция " + @Model.Name;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Инвентарная карточка</h2>
 
 <div>
-    <h4>InventoryItem</h4>
+    <h4>@Model.Name</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+        @*<dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>*@
         <dt>
             @Html.DisplayNameFor(model => model.InventoryNumber)
         </dt>
@@ -56,6 +56,32 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-controller="InventorySheet" asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Изменить</a> |
+    <a href="#"
+       data-toggle="modal"
+       data-target="#deleteModal"
+       data-item-id="@Model.Id"
+       data-item-name="@Model.Name">
+        Удалить
+    </a> |
+    <a asp-controller="InventorySheet" asp-action="InventorySheet" asp-route-id="@Model.InventorySheetId">Назад к ведомости</a>
 </div>
+
+<partial name="_ModalDelete" />
+
+@section scripts
+    {
+    <script>
+        $('#deleteModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var itemID = button.data('item-id') // Extract info from data-* attributes
+            var itemName = button.data('item-name') // Extract info from data-* attributes
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $(this)
+            modal.find('.delete').attr("href", "item/delete/" + itemID)
+            modal.find('.modal-header .modal-title').text("Удаление позиции")
+            modal.find('.modal-body h5').text("Вы действительно хотите удалить позиции " + itemName + "?")
+        })
+    </script>
+}
