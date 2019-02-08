@@ -5,7 +5,7 @@
 
 #Minification css and js
 
-Inventory/Inventory/wwwroot/css/style.css
+Inventory/wwwroot/css/style.css
 
 # User-specific files
 *.suo
