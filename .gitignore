@@ -5,8 +5,7 @@
 
 #Minification css and js
 
-SmartTrash/SmartTrash/wwwroot/css/vendor.min.css
-SmartTrash/SmartTrash/wwwroot/js/vendor.min.js
+Inventory/Inventory/wwwroot/css/style.css
 
 # User-specific files
 *.suo
