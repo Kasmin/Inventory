@@ -1,0 +1,57 @@
+nav.navbar.navbar-inverse {
+  background: gray; }
+
+body {
+  display: flex;
+  flex-direction: column; }
+
+html, body {
+  height: 100%; }
+
+.container {
+  padding: 15px; }
+
+.footer {
+  flex-shrink: 0; }
+
+.body-content {
+  padding-left: 15px;
+  padding-right: 15px;
+  flex: 1 0 auto; }
+
+.login-buttons ul li {
+  list-style: none;
+  display: inline-block; }
+
+.login-buttons {
+  text-align: center;
+  margin: 20px 0; }
+
+.margin-auto-width {
+  margin: 0 auto; }
+
+/* Carousel */
+.carousel-caption p {
+  font-size: 20px;
+  line-height: 1.4; }
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"] {
+  width: 100%; }
+
+/* QR code generator */
+#qrCode {
+  margin: 15px; }
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+  /* Hide captions */
+  .carousel-caption {
+    display: none; } }
+
+/* ---------- Item Details ----------- */
+@media (min-width: 768px) {
+  .dl-horizontal dt {
+    width: 180px; }
+  .dl-horizontal dd {
+    margin-left: 200px; } }

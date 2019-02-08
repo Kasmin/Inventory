@@ -1,26 +1,37 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
-for details on configuring this project to bundle and minify static web assets. */
+﻿@import 'nav.scss';
+
 body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
+html, body {
+    height: 100%;
+}
+.container {
+    padding: 15px;
+}
+.footer {
+    flex-shrink: 0;
+}
+
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    flex: 1 0 auto;
 }
 
 .login-buttons ul li {
     list-style: none;
     display: inline-block;
 }
-.login-buttons{
+
+.login-buttons {
     text-align: center;
     margin: 20px 0;
 }
-.margin-auto-width{
+
+.margin-auto-width {
     margin: 0 auto;
 }
 /* Carousel */
@@ -52,6 +63,7 @@ body {
     .dl-horizontal dt {
         width: 180px;
     }
+
     .dl-horizontal dd {
         margin-left: 200px;
     }
