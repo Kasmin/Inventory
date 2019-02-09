@@ -56,15 +56,17 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Изменить</a> |
-    <a href="#"
+    <a class="pure-button button-warning" asp-action="Edit" asp-route-id="@Model.Id">Изменить</a> |
+    <a 
+       class="button-error pure-button"
+       href="#"
        data-toggle="modal"
        data-target="#deleteModal"
        data-item-id="@Model.Id"
        data-item-name="@Model.Name">
         Удалить
     </a> |
-    <a asp-controller="InventorySheet" asp-action="InventorySheet" asp-route-id="@Model.InventorySheetId">Назад к ведомости</a>
+    <a class="pure-button pure-button-primary" asp-controller="InventorySheet" asp-action="InventorySheet" asp-route-id="@Model.InventorySheetId">Назад к ведомости</a>
 </div>
 
 <partial name="_ModalDelete" />

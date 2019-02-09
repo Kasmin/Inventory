@@ -1,3 +1,29 @@
 ﻿nav.navbar.navbar-inverse {
     background: gray;
 }
+.navbar-collapse {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.navbar-button {
+    display: none;
+}
+.navbar ul {
+    list-style: none;
+}
+.navbar a {
+    color: white;
+    text-decoration: none;
+}
+button.navbar-link {
+    background: none;
+    border: 0;
+    padding: 0;
+    color: white;
+    cursor: pointer;
+}
+.navbar-brand {
+    font-size: 20px;
+    font-weight: bold;
+}
